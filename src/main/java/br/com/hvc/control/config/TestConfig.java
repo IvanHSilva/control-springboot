@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import br.com.hvc.control.entities.Category;
 import br.com.hvc.control.entities.Order;
+import br.com.hvc.control.entities.Product;
 import br.com.hvc.control.entities.User;
 import br.com.hvc.control.entities.enums.OrderStatus;
 import br.com.hvc.control.repositories.CategoryRepository;
 import br.com.hvc.control.repositories.OrderRepository;
+import br.com.hvc.control.repositories.ProductRepository;
 import br.com.hvc.control.repositories.UserRepository;
 
 @Configuration
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -50,5 +55,13 @@ public class TestConfig implements CommandLineRunner {
 		Category cat4 = new Category(null, "Comics");
 		Category cat5 = new Category(null, "Movies");
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
+		
+		Product p1 = new Product(null, "The Lord of the Rings", "Primeiro livro da série", 70.0, "");
+		Product p2 = new Product(null, "Smart TV", "Full HD 1080P, Compatível com os Melhores apps", 2500.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "O melhor note em todas as categorias", 1850.0, "");
+		Product p4 = new Product(null, "PC Gamer", "O micro turbinado e poderoso pra quem gosta de jogar", 3800.0, "");
+		Product p5 = new Product(null, "Crisis on Infinite Earths", "Uma das melhores sagas clássicas dos Quadrinhos", 100.00, "");
+		Product p6 = new Product(null, "Game Of Thrones", "A fantástica série, agora completa em DVD e Blu-Ray", 600.00, "");
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
 	}
 }
