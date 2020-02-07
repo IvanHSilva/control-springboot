@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import br.com.hvc.control.entities.Category;
 import br.com.hvc.control.entities.Order;
+import br.com.hvc.control.entities.OrderItem;
 import br.com.hvc.control.entities.Product;
 import br.com.hvc.control.entities.User;
 import br.com.hvc.control.entities.enums.OrderStatus;
 import br.com.hvc.control.repositories.CategoryRepository;
+import br.com.hvc.control.repositories.OrderItemRepository;
 import br.com.hvc.control.repositories.OrderRepository;
 import br.com.hvc.control.repositories.ProductRepository;
 import br.com.hvc.control.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -73,5 +78,15 @@ public class TestConfig implements CommandLineRunner {
 		p5.getCategories().add(cat4);
 		p6.getCategories().add(cat5);
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p5, 3, p5.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p2, 1, p2.getPrice());
+		OrderItem oi5 = new OrderItem(o3, p3, 1, p3.getPrice());
+		OrderItem oi6 = new OrderItem(o4, p6, 1, p6.getPrice());
+		OrderItem oi7 = new OrderItem(o5, p4, 1, p4.getPrice());
+		OrderItem oi8 = new OrderItem(o5, p3, 1, p3.getPrice());
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6, oi7, oi8));
 	}
 }
